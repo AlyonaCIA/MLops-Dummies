@@ -1,4 +1,5 @@
 # MLops-Dummies
+
 # Kubernetes Nginx StatefulSet Project
 
 This repository contains a small Kubernetes project that demonstrates how to deploy a simple Nginx web application using a StatefulSet and expose it using a Service and optionally an Ingress. This project is ideal for learning and practicing Kubernetes concepts.
@@ -56,22 +57,22 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-          name: web
-        volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
   volumeClaimTemplates:
-  - metadata:
-      name: www
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
+    - metadata:
+        name: www
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
 ```
 
 Apply the StatefulSet configuration:
@@ -122,16 +123,16 @@ metadata:
   name: nginx-ingress
 spec:
   rules:
-  - host: nginx.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx-service
-            port:
-              number: 80
+    - host: nginx.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
 ```
 
 Apply the Ingress configuration:
@@ -203,4 +204,14 @@ Create a new repository on GitHub or GitLab and push your code:
 ```bash
 git remote add origin <URL-of-your-repository>
 git push -u origin master
+```
+
+## Examples
+
+### Scaling the Deployment
+
+To scale the StatefulSet, use:
+
+```bash
+kubectl scale statefulset/nginx-statefulset --replicas=5
 ```
