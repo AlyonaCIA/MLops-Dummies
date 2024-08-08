@@ -1,0 +1,34 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Kubernetes CLI
+        uses: azure/setup-kubectl@v1
+        with:
+          version: "1.24.0"
+
+      - name: Configure Kubernetes context
+        run: |
+          kubectl config set-cluster my-cluster --server=$KUBE_SERVER --certificate-authority=$KUBE_CA
+          kubectl config set-credentials my-user --token=$KUBE_TOKEN
+          kubectl config set-context my-context --cluster=my-cluster --user=my-user --namespace=default
+          kubectl config use-context my-context
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f deployments/ingress.yaml
+          kubectl apply -f deployments/service.yaml
+          kubectl apply -f deployments/statefulset.yaml
+          kubectl apply -f config/configmap.yaml
+          kubectl apply -f config/secret.yaml
