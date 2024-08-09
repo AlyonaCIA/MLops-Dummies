@@ -1,6 +1,4 @@
-"""
-Tests for Kubernetes service deployment.
-"""
+"""Tests for Kubernetes service deployment."""
 
 import subprocess
 
