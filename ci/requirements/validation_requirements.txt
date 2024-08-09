@@ -1,0 +1,19 @@
+# Linting and Formatting Tools
+pylint-exit==1.2.0
+docformatter==1.7.5
+autoflake==2.3.1
+
+# Testing and Mocking Tools
+pytest-mock==3.14.0
+requests-mock==1.12.1
+
+# CI/CD and Development Tools
+pylint==3.2.3
+flake8==7.0.0
+pytest==8.2.0
+pre-commit==3.3.1
+
+# Linting and Formatting
+autopep8~=2.2.0
+isort~=5.13.2
+
