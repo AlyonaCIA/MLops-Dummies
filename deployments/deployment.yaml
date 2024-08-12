@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -17,5 +22,12 @@ spec:
       containers:
         - name: nginx
           image: nginx:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
+              name: http
+          resources:
+            limits:
+              cpu: 50m
+            requests:
+              cpu: 20m
