@@ -19,4 +19,4 @@ else
   exit 1
 fi
 
-echo "Service test passed."
+echo "Service test passed :)."
