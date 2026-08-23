@@ -1,0 +1,16 @@
+{
+    "name": "nginx",
+    "version": "1.0.0",
+    "description": "My Node.js Application",
+    "main": "main.js",
+    "scripts": {
+      "start": "node main.js"
+    },
+    "author": "Alyona C. Ivanova-Araujo",
+    "license": "MIT",
+    "dependencies": {
+      "http": "^0.0.1"
+    }
+  }
+  
+  
